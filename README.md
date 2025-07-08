@@ -1,5 +1,5 @@
 # Strawberry Yield Optimizer 🍓
-Making the best strawberry breed
+Making the best strawberry breed, since there are various allergens and high-costs for low quality crop-yield
 
 ## Software and Hardware Components
 - Real-time Monitoring: Continuous tracking of soil moisture, temperature, and humidity
