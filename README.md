@@ -33,3 +33,15 @@ Making the best strawberry breed
 - Adafruit_SSD1306
 - DHT sensor library
 - ThingSpeak
+
+## Pollination
+### Self-Pollination
+
+- Method: Strawberries are self-fertile
+- Frequency: Daily during flowering period
+
+### Hand Pollination 
+- Tools: Small brush or cotton swab
+- Technique: Gently brush center of each flower
+- Timing: Mid-morning when flowers are fully open
+- Frequency: Every 2-3 days during flowering
