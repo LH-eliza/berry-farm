@@ -1,2 +1,2 @@
-# berry-farm
-Making the best strawberry farms
+# Strawberry Yield Optimizer 🍓
+Making the best strawberry breed
