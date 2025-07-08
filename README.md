@@ -1,6 +1,7 @@
 # Strawberry Yield Optimizer 🍓
 Making the best strawberry breed
 
+## Software and Hardware Components
 - Real-time Monitoring: Continuous tracking of soil moisture, temperature, and humidity
 - Smart Alerts: Discord Bot
 - Data Logging: Track plant health trends over time
@@ -34,7 +35,7 @@ Making the best strawberry breed
 - DHT sensor library
 - ThingSpeak
 
-## Pollination
+## How to Optimize the Strawberry Yield
 ### Self-Pollination
 
 - Method: Strawberries are self-fertile
@@ -42,6 +43,6 @@ Making the best strawberry breed
 
 ### Hand Pollination 
 - Tools: Small brush or cotton swab
-- Technique: Gently brush center of each flower
+- Technique: Gently brush the center of each flower
 - Timing: Mid-morning when flowers are fully open
 - Frequency: Every 2-3 days during flowering
