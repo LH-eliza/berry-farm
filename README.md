@@ -19,7 +19,7 @@ Making the best strawberry breed
 - Breadboard/PCB - Component connections
 - Jumper Wires - Sensor connections
 
-### Optional Enhancements
+### Future Enhancements
 - Water Pump & Relay - Automated watering system
 - Light Sensor (LDR) - Monitor grow light effectiveness
 
