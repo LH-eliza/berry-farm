@@ -1,4 +1,4 @@
-# Strawberry Yield Optimizer 🍓
+# Berry Yield Optimizer 🍓 - Primary Focus Strawberries
 Making the best strawberry breed, since there are various allergens and high-costs for low quality crop-yield
 
 ## Software and Hardware Components
