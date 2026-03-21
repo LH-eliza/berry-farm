@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Berry Farm Monitor
 
-## Getting Started
+Next.js dashboard and TypeScript “ML pipeline” layer for the [berry-farm](../README.md) project: plant health, growth stage, yield, climate, and nutrient heuristics (simulated / placeholder models today), plus a **hardware ingest API** for the **Seeed SenseCAP K1100** kit.
 
-First, run the development server:
+## Stack
+
+- **Next.js 15** (App Router), React 19, Tailwind CSS, shadcn-style UI
+- **ML pipeline code**: `src/lib/ml/` — orchestrated by `MLPipeline` and `DataPipeline`
+- **Hardware**: `src/lib/hardware/sensecap-k1100.ts`, `POST /api/ingest/k1100`
+
+## Getting started
 
 ```bash
+cd strawberry-monitor
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **App**: [http://localhost:3000](http://localhost:3000)
+- **ML demo**: [http://localhost:3000/ml-demo](http://localhost:3000/ml-demo)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Other scripts: `npm run build`, `npm run start`, `npm run lint`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment variables
 
-## Learn More
+Copy `.env.example` to `.env.local` if you use ingest auth:
 
-To learn more about Next.js, take a look at the following resources:
+| Variable | Purpose |
+|----------|---------|
+| `K1100_INGEST_SECRET` | If set, `POST /api/ingest/k1100` requires `Authorization: Bearer <same value>` |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## SenseCAP K1100 ingest
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`POST /api/ingest/k1100` accepts JSON from a Wio Terminal (Wi‑Fi), or from a LoRaWAN → HTTP relay.
 
-## Deploy on Vercel
+**Required fields:** `temperatureC`, `humidityPct`, `soilMoisturePct`  
+**Optional:** `lightLux`, `ph`, `ec`, `tvocPpb`, `eco2Ppm`, `deviceId`, `recordedAt` (ISO 8601). Snake_case field names are also accepted.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The kit does not include pH, EC, or lux; omitted values use documented defaults until you add sensors. Full notes and architecture links: **[ML_PIPELINE_README.md](./ML_PIPELINE_README.md)** (section *SenseCAP K1100 hardware ingest*).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project layout
+
+```
+strawberry-monitor/
+├── src/app/                 # Pages & API routes
+│   ├── api/ingest/k1100/    # Hardware POST endpoint
+│   ├── ml-demo/
+│   └── page.tsx
+├── src/components/ml/       # MLDashboard, etc.
+├── src/lib/ml/              # Pipeline and model stubs
+└── src/lib/hardware/        # K1100 payload parsing
+```
+
+## Documentation
+
+- **[ML_PIPELINE_README.md](./ML_PIPELINE_README.md)** — pipeline APIs, data shapes, batch processing, K1100 integration
+
+## Deploy
+
+Compatible with [Vercel](https://vercel.com) and similar Node hosts. Set `K1100_INGEST_SECRET` in the host’s env if you enable ingest authentication.

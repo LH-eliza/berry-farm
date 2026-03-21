@@ -130,6 +130,20 @@ Sensors/Cameras → Edge Processing → Cloud Storage → ML Pipeline → Contro
 - **Yield forecasts**: Predictive analytics and harvest scheduling
 - **Alert system**: Priority-based notifications and recommendations
 
+### SenseCAP K1100 hardware ingest
+
+The kit’s **Grove SHT40** (air temp / humidity), **soil moisture**, and optional **SGP30** (TVOC / eCO₂) align with the pipeline’s environmental inputs. The bundle does **not** include pH, EC, or a lux sensor; the ingest API fills sensible defaults for those until you add probes or pass overrides.
+
+- **Endpoint**: `POST /api/ingest/k1100` (Next.js app, e.g. `http://localhost:3000/api/ingest/k1100` in dev).
+- **Optional auth**: Set `K1100_INGEST_SECRET` in `.env.local` and send header `Authorization: Bearer <same value>`.
+- **Body** (JSON): `temperatureC`, `humidityPct`, `soilMoisturePct` (required). Optional: `lightLux`, `ph`, `ec`, `tvocPpb`, `eco2Ppm`, `deviceId`, `recordedAt` (ISO 8601). Snake_case aliases `temperature_c`, `humidity_pct`, `soil_moisture_pct`, `light_lux`, `recorded_at` are accepted.
+
+Implementation: `src/lib/hardware/sensecap-k1100.ts` and `src/app/api/ingest/k1100/route.ts`.
+
+**Deployment paths**: (1) Wio Terminal on Wi‑Fi — HTTP POST from your sketch. (2) LoRaWAN via **Wio‑E5** — decode payload on TTN/Helium and have a small relay POST the same JSON to your server. (3) **SenseCAP Portal / Node‑RED** — forward decoded readings to your URL. See Seeed’s [K1100 getting started](https://wiki.seeedstudio.com/K1100-Getting-Started/) for per-sensor examples.
+
+**Scale (e.g. ~144 lettuce seedlings)**: One K1100 station measures **one placement** (one tray, one corner of the tent, etc.). Use multiple nodes or move the probe on a schedule if you need spatial coverage; the API can carry `deviceId` / future `zone` fields for that.
+
 ## 🚀 Getting Started
 
 ### Prerequisites

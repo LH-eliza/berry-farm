@@ -435,7 +435,7 @@ export class YieldPredictor {
 
     const yields = plantData.map((d) => d.actualYield);
     const averageYield =
-      yields.reduce((sum, yield) => sum + yield, 0) / yields.length;
+      yields.reduce((sum, y) => sum + y, 0) / yields.length;
 
     // Calculate trend
     const recentYields = yields.slice(-3);
@@ -444,10 +444,10 @@ export class YieldPredictor {
     let yieldTrend: "increasing" | "stable" | "decreasing" = "stable";
     if (recentYields.length > 0 && earlierYields.length > 0) {
       const recentAvg =
-        recentYields.reduce((sum, yield) => sum + yield, 0) /
+        recentYields.reduce((sum, y) => sum + y, 0) /
         recentYields.length;
       const earlierAvg =
-        earlierYields.reduce((sum, yield) => sum + yield, 0) /
+        earlierYields.reduce((sum, y) => sum + y, 0) /
         earlierYields.length;
 
       if (recentAvg > earlierAvg + 10) yieldTrend = "increasing";
@@ -486,7 +486,7 @@ export class YieldPredictor {
     const monthlyAverages = Array.from(monthlyYields.entries()).map(
       ([month, yields]) => ({
         month,
-        average: yields.reduce((sum, yield) => sum + yield, 0) / yields.length,
+        average: yields.reduce((sum, y) => sum + y, 0) / yields.length,
       })
     );
 

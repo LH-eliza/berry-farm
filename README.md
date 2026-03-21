@@ -1,6 +1,10 @@
 # Berry Yield Optimizer - Phase 1 Strawberries
 Making the best strawberry breed, since there are various allergens and high-costs for low quality crop-yield
 
+## Web app & ML dashboard
+
+The **Next.js** app lives in [`strawberry-monitor/`](./strawberry-monitor/README.md): plant and environmental monitoring UI, ML pipeline stubs, and a **`POST /api/ingest/k1100`** endpoint for the **Seeed SenseCAP K1100** (Wio Terminal + Groves + optional LoRaWAN). See that folder’s README and [`strawberry-monitor/ML_PIPELINE_README.md`](./strawberry-monitor/ML_PIPELINE_README.md) for setup and payload format.
+
 ## Software and Hardware Components
 - Real-time Monitoring: Continuous tracking of soil moisture, temperature, and humidity
 - Smart Alerts: Discord Bot
@@ -10,7 +14,8 @@ Making the best strawberry breed, since there are various allergens and high-cos
 - Growth Stage Adaptation: Adjust thresholds based on plant growth phase
 
 ### Essential Components
-- ESP32 Development Board - Main controller with WiFi
+- **SenseCAP K1100** (optional path aligned with the web ingest API): Wio Terminal, Grove SHT40, soil moisture, SGP30, Grove Vision AI, Wio‑E5 LoRa — see [Seeed K1100 wiki](https://wiki.seeedstudio.com/K1100-Getting-Started/)
+- ESP32 Development Board - Main controller with WiFi (alternate / Phase 1 prototype)
 - Capacitive Soil Moisture Sensor - Corrosion-resistant moisture detection
 - DHT22 Sensor - Temperature and humidity monitoring
 - 0.96" OLED Display - Local readings display
