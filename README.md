@@ -1,4 +1,4 @@
-# Berry farm
+# Plant farm
 
 Growing-focused project: **SenseCAP K1100** (Wio Terminal, SHT40, soil moisture, SGP30, Vision AI, Wio‑E5) plus **Grove Creator Kit γ** (40 modules).
 ## Web app
