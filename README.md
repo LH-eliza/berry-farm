@@ -1,7 +1,6 @@
 # Berry farm
 
-Growing-focused project: **SenseCAP K1100** (Wio Terminal, SHT40, soil moisture, SGP30, Vision AI, Wio‑E5) plus **Grove Creator Kit γ** (40 modules). No separate ESP32 required — the Wio runs Wi‑Fi and talks to this repo’s web app.
-
+Growing-focused project: **SenseCAP K1100** (Wio Terminal, SHT40, soil moisture, SGP30, Vision AI, Wio‑E5) plus **Grove Creator Kit γ** (40 modules).
 ## Web app
 
 [`strawberry-monitor/`](./strawberry-monitor/README.md) — Next.js with **`POST /api/ingest/k1100`** for sensor JSON from your firmware.
