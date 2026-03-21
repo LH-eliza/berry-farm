@@ -3,8 +3,6 @@ import { parseK1100Payload } from "@/lib/hardware/sensecap-k1100";
 
 /**
  * Ingest environmental readings from a SenseCAP K1100 (Wio Terminal + Groves).
- * Configure the device to POST JSON here, or forward LoRaWAN payloads from a bridge.
- *
  * Optional auth: set `K1100_INGEST_SECRET` in `.env.local` and send
  * `Authorization: Bearer <same value>`.
  */

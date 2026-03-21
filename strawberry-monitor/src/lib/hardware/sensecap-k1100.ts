@@ -1,4 +1,13 @@
-import type { SensorData } from "@/lib/ml/ml-pipeline";
+/** Normalized reading after ingest (for dashboards, DB, or future ML jobs). */
+export interface SensorReading {
+  temperature: number;
+  humidity: number;
+  soilMoisture: number;
+  lightIntensity: number;
+  ph: number;
+  ec: number;
+  timestamp: Date;
+}
 
 /** JSON body your Wio Terminal (or LoRaWAN → relay) should POST to `/api/ingest/k1100`. */
 export interface K1100Payload {
@@ -8,12 +17,12 @@ export interface K1100Payload {
   humidityPct: number;
   /** Soil moisture 0–100 after calibration on the device */
   soilMoisturePct: number;
-  /** Optional: Wio light sensor or external lux meter */
+  /** Optional: Grove light sensor or external lux meter */
   lightLux?: number;
-  /** Optional: if you add pH / EC probes later */
+  /** Optional: dedicated probes */
   ph?: number;
   ec?: number;
-  /** SGP30 — stored for your analytics; not used by the current TS “ML” heuristics */
+  /** SGP30 — optional metadata for your own storage / analytics */
   tvocPpb?: number;
   eco2Ppm?: number;
   deviceId?: string;
@@ -22,7 +31,7 @@ export interface K1100Payload {
 }
 
 export interface K1100ParseResult {
-  sensorData: SensorData;
+  sensorData: SensorReading;
   warnings: string[];
 }
 
@@ -35,8 +44,7 @@ function isFiniteNumber(v: unknown): v is number {
 }
 
 /**
- * Validates a K1100 POST body and produces {@link SensorData} for {@link MLPipeline}.
- * Fills light / pH / EC with documented defaults when absent (K1100 bundle has no pH, EC, or lux).
+ * Validates a K1100 POST body. Fills light / pH / EC with defaults when absent.
  */
 export function parseK1100Payload(body: unknown): K1100ParseResult {
   if (body === null || typeof body !== "object") {
@@ -92,7 +100,7 @@ export function parseK1100Payload(body: unknown): K1100ParseResult {
     timestamp = new Date();
   }
 
-  const sensorData: SensorData = {
+  const sensorData: SensorReading = {
     temperature: temperatureC,
     humidity: humidityPct,
     soilMoisture: soilMoisturePct,

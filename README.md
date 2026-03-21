@@ -1,53 +1,30 @@
-# Berry Yield Optimizer - Phase 1 Strawberries
-Making the best strawberry breed, since there are various allergens and high-costs for low quality crop-yield
+# Berry farm
 
-## Web app & ML dashboard
+Growing-focused project: **SenseCAP K1100** (Wio Terminal, SHT40, soil moisture, SGP30, Vision AI, Wio‑E5) plus **Grove Creator Kit γ** (40 modules). No separate ESP32 required — the Wio runs Wi‑Fi and talks to this repo’s web app.
 
-The **Next.js** app lives in [`strawberry-monitor/`](./strawberry-monitor/README.md): plant and environmental monitoring UI, ML pipeline stubs, and a **`POST /api/ingest/k1100`** endpoint for the **Seeed SenseCAP K1100** (Wio Terminal + Groves + optional LoRaWAN). See that folder’s README and [`strawberry-monitor/ML_PIPELINE_README.md`](./strawberry-monitor/ML_PIPELINE_README.md) for setup and payload format.
+## Web app
 
-## Software and Hardware Components
-- Real-time Monitoring: Continuous tracking of soil moisture, temperature, and humidity
-- Smart Alerts: Discord Bot
-- Data Logging: Track plant health trends over time
-- Visual Indicators: LED status lights and OLED display
-- Multi-plant Support: Monitor multiple strawberry plants simultaneously
-- Growth Stage Adaptation: Adjust thresholds based on plant growth phase
+[`strawberry-monitor/`](./strawberry-monitor/README.md) — Next.js with **`POST /api/ingest/k1100`** for sensor JSON from your firmware.
 
-### Essential Components
-- **SenseCAP K1100** (optional path aligned with the web ingest API): Wio Terminal, Grove SHT40, soil moisture, SGP30, Grove Vision AI, Wio‑E5 LoRa — see [Seeed K1100 wiki](https://wiki.seeedstudio.com/K1100-Getting-Started/)
-- ESP32 Development Board - Main controller with WiFi (alternate / Phase 1 prototype)
-- Capacitive Soil Moisture Sensor - Corrosion-resistant moisture detection
-- DHT22 Sensor - Temperature and humidity monitoring
-- 0.96" OLED Display - Local readings display
-- RGB LED - Visual status indicators
-- Micro USB Cable - Power supply
-- Breadboard/PCB - Component connections
-- Jumper Wires - Sensor connections
+```bash
+cd strawberry-monitor
+npm install
+npm run dev
+```
 
-### Future Enhancements
-- Water Pump & Relay - Automated watering system
-- Light Sensor (LDR) - Monitor grow light effectiveness
+## Hardware quick map
 
-### Software Requirements
-- Arduino IDE 
-- ESP32 Board Package
+| Source | Role |
+|--------|------|
+| K1100 SHT40 | `temperatureC`, `humidityPct` |
+| K1100 soil probe | `soilMoisturePct` (calibrate 0–100 in firmware) |
+| Creator Kit γ light sensor | `lightLux` (calibrate ADC → lux) |
+| SGP30 | optional `tvocPpb`, `eco2Ppm` in JSON (store yourself if you extend the API) |
+| Wio RTC (γ kit) | better local timestamps before POST |
 
-### Libraries:
-- WiFi
-- HTTPClient
-- ArduinoJson
-- Adafruit_SSD1306
-- DHT sensor library
-- ThingSpeak
+See [Seeed K1100](https://wiki.seeedstudio.com/K1100-Getting-Started/) and [Grove Creator Kit](https://wiki.seeedstudio.com/Grove-Creator-Kit-1/).
 
-## How to Optimize the Strawberry Yield
-### Self-Pollination
+## Crop notes (strawberries)
 
-- Method: Strawberries are self-fertile
-- Frequency: Daily during flowering period
-
-### Hand Pollination 
-- Tools: Small brush or cotton swab
-- Technique: Gently brush the center of each flower
-- Timing: Mid-morning when flowers are fully open
-- Frequency: Every 2-3 days during flowering
+- **Self-pollination:** strawberries are self-fertile; during flowering, gentle daily disturbance can help.
+- **Hand pollination:** small brush or swab on open flowers, mid-morning, every 2–3 days in flowering.
