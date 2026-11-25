@@ -24,6 +24,12 @@ export default function Home() {
 }`}
           </pre>
         </section>
+        <a
+          href="/learn"
+          className="rounded-lg border border-emerald-700/50 bg-emerald-950/40 p-4 text-sm text-emerald-300 hover:bg-emerald-950/70"
+        >
+          New: <b>Learn Berry Farming</b> — an interactive strawberry course for your K1100 kit →
+        </a>
         <p className="text-xs text-zinc-600">
           See repo <code className="text-zinc-500">README.md</code> for hardware
           notes and optional <code className="text-zinc-500">K1100_INGEST_SECRET</code>.
